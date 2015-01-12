@@ -12,18 +12,20 @@ import java.util.LinkedList;
 
 import Items.Armor;
 import Items.Item;
+import Items.Shield;
+import Items.Weapon;
 
 public class Inventory implements Serializable {
 	
 	private Armor armor;
-	private Armor shield;
-	private Item weapon1, weapon2, weaponRanged;
+	private Shield shield;
+	private Weapon weapon1, weapon2, weaponRanged;
 	private LinkedList<Item> carriedItems;
 	private LinkedList<Item> wornItems;
 	private int attunedCount;
 	
 	/**
-	 * 
+	 * Constructor
 	 */
 	public Inventory() {
 		
@@ -32,51 +34,109 @@ public class Inventory implements Serializable {
 		attunedCount = 0;
 	}
 	
-	
+	/**
+	 * @param none
+	 * @return Armor type
+	 * Returns the character's armor.
+	 */
 	public Armor getArmor() {
 		return armor;
 	}
-	
-	public Armor getShield() {
+	/**
+	 * @param none
+	 * @return Shield type
+	 * Returns the character's shield.
+	 */
+	public Shield getShield() {
 		return shield;
 	}
-	
-	public Item getMainHand() {
+	/**
+	 * @param none
+	 * @return Weapon type
+	 * Returns the character's main weapon.
+	 */
+	public Weapon getMainHand() {
 		return weapon1;
 	}
-	
-	public Item getOffHand() {
+	/**
+	 * @param none
+	 * @return Weapon type
+	 * Returns the character's secondary weapon.
+	 */
+	public Weapon getOffHand() {
 		return weapon2;
 	}
 	
-	public Item getRanged() {
+	/**
+	 * @param none
+	 * @return Weapon type
+	 * Returns the character's ranged weapon.
+	 */
+	public Weapon getRanged() {
 		return weaponRanged;
 	}
 	
+	/**
+	 * @param none
+	 * @return LinkedList<Item>
+	 * Returns a list of worn items.
+	 */
 	public LinkedList<Item> getWornItems() {
 		return wornItems;
 	}
-	
+	/**
+	 * @param none
+	 * @return LinkedList<Item>
+	 * Returns a list of carried items.
+	 */
 	public LinkedList<Item> getCarriedItems() {
 		return carriedItems;
 	}
-	
-	public void addMainHand(Item mainHand) {
+	/**
+	 * 
+	 * @param mainHand - Weapon type
+	 * @return none
+	 * Adds a weapon to the main hand
+	 * 
+	 */
+	public void addMainHand(Weapon main) {
+		
+	}
+	/**
+	 * 
+	 * @param mainHand - Weapon type
+	 * @return none
+	 * Adds a weapon to the off hand
+	 * 
+	 */
+	public void addOffHand(Weapon off) {
 		
 	}
 	
-	public void addOffHand() {
+	/**
+	 * @param sh - Shield type
+	 * @return none
+	 * Adds a shield to shield slot
+	 */
+	public void addShield(Shield sh) {
 		
 	}
 	
-	public void addShield() {
-		
-	}
-	
+	/**
+	 * @param rng - Weapon type
+	 * @return none
+	 * Adds a ranged weapon to ranged slot
+	 */
 	public void addRanged() {
 		
 	}
 	
+	/**
+	 * 
+	 * @param a - Armor type
+	 * @return none
+	 * Adds armor to armor slot.
+	 */
 	public void addArmor(Armor a) {
 		
 		if(!armor.getAttune() || attunedCount <= 3) {
@@ -88,40 +148,80 @@ public class Inventory implements Serializable {
 			attunedCount++;
 	}
 	
+	/**
+	 * @param none
+	 * @return none
+	 * Removes main weapon
+	 */
 	public void removeMainHand() {
 		
 	}
-	
+	/**
+	 * @param none
+	 * @return none
+	 * Removes secondary weapon
+	 */
 	public void removeOffHand() {
 		
 	}
-	
+	/**
+	 * @param none
+	 * @return none
+	 * Removes shield
+	 */
 	public void removeShield() {
 		
 	}
 	
+	/**
+	 * @param none
+	 * @return none
+	 * Removes ranged weapon
+	 */
 	public void removeRanged() {
 		
 	}
-	
+	/**
+	 * @param none
+	 * @return none
+	 * Removes armor
+	 */
 	public void removeArmor() {
 		armor = null;
 		Character.getInstance().setAC();
 	}
-	
-	public void carryItem() {
+	/**
+	 * @param i - Item type
+	 * @return none
+	 * Adds an item to the carriedItems list
+	 */
+	public void carryItem(Item i) {
+		
+	}
+	/**
+	 * @param i - Item type
+	 * @return boolean - success/failure
+	 * Drops an item type from the carriedItems list.
+	 */
+	public boolean dropItem(Item i) {
+		return false;
+	}
+	/**
+	 * @param i - Item type
+	 * @return none
+	 * Adds an item to the wornItems list
+	 */
+	public void wearItem(Item i) {
 		
 	}
 	
-	public void dropItem() {
-		
-	}
+	/**
+	 * @param i - Item type
+	 * @return none
+	 * Removes an Item from the wornItems list
+	 */
 	
-	public void wearItem() {
-		
-	}
-	
-	public void takeOffItem() {
+	public void takeOffItem(Item i) {
 		
 	}
 }

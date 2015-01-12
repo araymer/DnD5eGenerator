@@ -1,9 +1,17 @@
+/**
+ * @Author Aaron Raymer
+ * Dwarf class - extends Race type
+ */
 package Races;
 
 
 public class Dwarf extends Race {
 	
-	
+	/**
+	 * @param none
+	 * @return none
+	 * Constructor - base move: 25
+	 */
 	public Dwarf() {
 		super(25);
 	}
