@@ -10,10 +10,8 @@ package model;
 import java.io.Serializable;
 import java.util.LinkedList;
 
-import Items.Armor;
-import Items.Item;
-import Items.Shield;
-import Items.Weapon;
+import Items.*;
+
 
 public class Inventory implements Serializable {
 	
@@ -32,6 +30,8 @@ public class Inventory implements Serializable {
 		carriedItems = new LinkedList<Item>();
 		wornItems = new LinkedList<Item>();
 		attunedCount = 0;
+		armor = new BlankArmor();
+		shield = new BlankShield();
 	}
 	
 	/**
@@ -138,6 +138,7 @@ public class Inventory implements Serializable {
 	 * Adds armor to armor slot.
 	 */
 	public void addArmor(Armor a) {
+		
 		
 		if(!armor.getAttune() || attunedCount <= 3) {
 			armor = a;

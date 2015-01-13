@@ -12,6 +12,7 @@ public abstract class Item {
 		name = n;
 		weight = w;
 		size = s;
+		attuned = false;
 	}
 	
 	public String getName() {
