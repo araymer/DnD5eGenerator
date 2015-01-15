@@ -5,6 +5,8 @@
  * persistence of character info.
  */
 
+
+
 package model;
 
 import java.io.Serializable;

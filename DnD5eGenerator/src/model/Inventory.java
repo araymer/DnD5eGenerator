@@ -34,6 +34,9 @@ public class Inventory implements Serializable {
 		shield = new BlankShield();
 	}
 	
+	
+
+	
 	/**
 	 * @param none
 	 * @return Armor type
