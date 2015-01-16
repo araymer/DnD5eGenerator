@@ -10,13 +10,15 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.LinkedList;
 
+import model.ClassAbilities;
+
 public abstract class CharClass implements Serializable {
 	
 	private int hitDie, level;
 	protected LinkedList<String> weaponProf;
 	protected LinkedList<String> armorProf;
 	protected LinkedList<String> skillProf;
-	protected HashMap<String, String> classAbilities;
+	protected LinkedList<ClassAbilities> classAbilities;
 	
 	/**
 	 * 
@@ -30,7 +32,7 @@ public abstract class CharClass implements Serializable {
 		armorProf =  new LinkedList<String>();
 		skillProf =  new LinkedList<String>();
 		level = 1;
-		classAbilities = new HashMap<String, String>();
+		classAbilities = new LinkedList<ClassAbilities>();
 	}
 	
 

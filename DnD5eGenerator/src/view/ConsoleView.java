@@ -2,10 +2,10 @@ package view;
 
 import java.util.Scanner;
 
-import Classes.Fighter;
-import Items.StuddedLeather;
-import Races.Dwarf;
-import model.Alignment;
+import Classes.*;
+import Items.*;
+import Races.*;
+import model.*;
 import model.Character;
 
 public class ConsoleView {
@@ -24,7 +24,7 @@ public class ConsoleView {
 			ch.setCharName("Buttfuck Mcgee");
 			ch.setAlignment(Alignment.CHAOTICEVIL);
 			ch.setRace(new Dwarf());
-			ch.addCharClass(new Fighter());
+			ch.addCharClass(new Barbarian());
 			ch.setPlayerName("Donald Duck");
 			ch.getInventory().addArmor(new StuddedLeather());
 			ch.getStr().toggleProficiency();

@@ -3,6 +3,8 @@
  * @Class Character - This is the controller class for the character model. It is responsible for organizing
  * and maintaining all character information. This class is serializable in order to maintain
  * persistence of character info.
+ * 
+ * 
  */
 
 
@@ -17,6 +19,7 @@ import java.util.Random;
 
 import Classes.CharClass;
 import Races.Race;
+import Skills.Skill;
 
 public class Character implements Observer, Serializable {
 	
@@ -29,7 +32,7 @@ public class Character implements Observer, Serializable {
 	private Alignment charAlignment;
 	private boolean pointBuy;
 	private Inventory inventory;
-	private SkillList skills;
+	private static SkillList skills;
 	private LinkedList<Attribute> abilityScores;
 	private Attribute str, dex, con, wis, intl, cha;
 	private int[] saves;
@@ -66,7 +69,7 @@ public class Character implements Observer, Serializable {
 		charClass = new LinkedList<CharClass>();
 		randomScoreAssignment();
 		setAC();
-		setHP();
+		
 		setSaves();
 		
 		
@@ -97,6 +100,10 @@ public class Character implements Observer, Serializable {
 	 */
 	public Inventory getInventory() {
 		return inventory;
+	}
+	
+	public int getProficiency() {
+		return profBonus;
 	}
 	
 	/**
@@ -175,8 +182,11 @@ public class Character implements Observer, Serializable {
 	public static Character getInstance() {
 		//TODO: maybe redesign this? Making this class singleton is handy, but could cause a problem
 		//when starting a new character (unless we want to just exit the program and restart it in that case?)
-		if(chRef == null)
+		if(chRef == null) {
 			chRef = new Character();
+			skills = new SkillList();
+			
+		}
 		
 		return chRef;
 	}
@@ -315,6 +325,11 @@ public class Character implements Observer, Serializable {
 		}
 		charClass.add(s);
 		
+		
+		
+		setHP();
+		setInit();
+		
 	}
 	
 	/**
@@ -384,6 +399,7 @@ public class Character implements Observer, Serializable {
 	 */
 	public void setRace(Race r) {
 		charRace = r;
+		r.adjustStats();
 	}
 	/**
 	 * 
@@ -445,6 +461,16 @@ public class Character implements Observer, Serializable {
 		for(int i = 0; i<saves.length; i++) {
 			string+= "\n" + abilityScores.get(i).getName() + ": " + saves[i];
 		}
+		
+		LinkedList<Skill> blah = skills.getSkillList();
+		
+		string+="\n\nSKILLS";
+		
+		for(Skill sk : blah) {
+			string+="\n" + sk.getName() + "\t" + sk.getTotal();
+		}
+		
+		
 		
 		return string;
 	}

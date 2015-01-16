@@ -10,7 +10,7 @@ public class Dwarf extends Race {
 	/**
 	 * @param none
 	 * @return none
-	 * Constructor - base move: 25
+	 * Constructor
 	 */
 	public Dwarf() {
 		super(25);
