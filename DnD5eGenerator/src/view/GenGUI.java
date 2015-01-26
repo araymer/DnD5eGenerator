@@ -1,35 +1,31 @@
 package view;
 
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import model.Character;
+
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
-import java.awt.CardLayout;
-import net.miginfocom.swing.MigLayout;
-import javax.swing.BoxLayout;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-import java.awt.BorderLayout;
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.RowSpec;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.border.EmptyBorder;
-import java.awt.Component;
-import java.awt.Dimension;
 import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.JLabel;
-import javax.swing.JCheckBox;
+
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.RowSpec;
 
 public class GenGUI {
 	
@@ -57,6 +53,8 @@ public class GenGUI {
 	private JSpinner intlSpinner;
 	private JSpinner wisSpinner;
 	private JSpinner chaSpinner;
+	private JSpinner dexSpinner;
+	private JSpinner conSpinner;
 	private JSpinner strSaveSpinner;
 	private JSpinner dexSaveSpinner;
 	private JSpinner conSaveSpinner;
@@ -124,9 +122,9 @@ public class GenGUI {
 		mainPanel.setToolTipText("Character Name");
 		genContainer.add(mainPanel, "1, 1, fill, fill");
 		
-		JSpinner dexSpinner = new JSpinner();
+		dexSpinner = new JSpinner();
 		
-		JSpinner conSpinner = new JSpinner();
+		conSpinner = new JSpinner();
 		
 		strSpinner = new JSpinner();
 		
@@ -308,54 +306,74 @@ public class GenGUI {
 		JLabel lblWis = new JLabel("WIS");
 		
 		JLabel lblCha = new JLabel("CHA");
+		
+		JButton btnRollStats = new JButton("Roll Stats");
+		btnRollStats.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Character.getInstance().randomScoreAssignment();
+				strSpinner.setValue(Character.getInstance().getStr().getValue());
+				dexSpinner.setValue(Character.getInstance().getDex().getValue());
+				conSpinner.setValue(Character.getInstance().getStr().getValue());
+				intlSpinner.setValue(Character.getInstance().getStr().getValue());
+				wisSpinner.setValue(Character.getInstance().getStr().getValue());
+				chaSpinner.setValue(Character.getInstance().getStr().getValue());
+				
+			}
+		});
 		GroupLayout gl_mainPanel = new GroupLayout(mainPanel);
 		gl_mainPanel.setHorizontalGroup(
 			gl_mainPanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_mainPanel.createSequentialGroup()
 					.addGroup(gl_mainPanel.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_mainPanel.createSequentialGroup()
-							.addContainerGap()
 							.addGroup(gl_mainPanel.createParallelGroup(Alignment.LEADING)
-								.addComponent(lblStr)
-								.addComponent(lblDex)
-								.addComponent(lblCon)
-								.addComponent(lblInt)
-								.addComponent(lblWis)
-								.addComponent(lblCha))
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addGroup(gl_mainPanel.createParallelGroup(Alignment.LEADING)
-								.addComponent(lblAbilities)
 								.addGroup(gl_mainPanel.createSequentialGroup()
+									.addContainerGap()
 									.addGroup(gl_mainPanel.createParallelGroup(Alignment.LEADING)
-										.addComponent(intlSpinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-										.addComponent(wisSpinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-										.addComponent(chaSpinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+										.addComponent(lblStr)
+										.addComponent(lblDex)
+										.addComponent(lblCon)
+										.addComponent(lblInt)
+										.addComponent(lblWis)
+										.addComponent(lblCha))
 									.addPreferredGap(ComponentPlacement.RELATED)
 									.addGroup(gl_mainPanel.createParallelGroup(Alignment.LEADING)
-										.addComponent(wisMod)
-										.addComponent(chaMod)
-										.addComponent(intlMod)))
-								.addGroup(gl_mainPanel.createSequentialGroup()
-									.addComponent(dexSpinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+										.addComponent(lblAbilities)
+										.addGroup(gl_mainPanel.createSequentialGroup()
+											.addGroup(gl_mainPanel.createParallelGroup(Alignment.LEADING)
+												.addComponent(intlSpinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+												.addComponent(wisSpinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+												.addComponent(chaSpinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+											.addPreferredGap(ComponentPlacement.RELATED)
+											.addGroup(gl_mainPanel.createParallelGroup(Alignment.LEADING)
+												.addComponent(wisMod)
+												.addComponent(chaMod)
+												.addComponent(intlMod)))
+										.addGroup(gl_mainPanel.createSequentialGroup()
+											.addComponent(dexSpinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+											.addPreferredGap(ComponentPlacement.RELATED)
+											.addComponent(dexMod))
+										.addGroup(gl_mainPanel.createSequentialGroup()
+											.addComponent(conSpinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+											.addPreferredGap(ComponentPlacement.RELATED)
+											.addComponent(conMod))
+										.addGroup(gl_mainPanel.createSequentialGroup()
+											.addComponent(strSpinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+											.addPreferredGap(ComponentPlacement.RELATED)
+											.addComponent(strMod)))
 									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(dexMod))
+									.addGroup(gl_mainPanel.createParallelGroup(Alignment.LEADING)
+										.addComponent(lblSaves)
+										.addComponent(strSaveSpinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+										.addComponent(dexSaveSpinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+										.addComponent(conSaveSpinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+										.addComponent(intlSaveSpinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+										.addComponent(wisSaveSpinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+										.addComponent(chaSaveSpinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
 								.addGroup(gl_mainPanel.createSequentialGroup()
-									.addComponent(conSpinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(conMod))
-								.addGroup(gl_mainPanel.createSequentialGroup()
-									.addComponent(strSpinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(strMod)))
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addGroup(gl_mainPanel.createParallelGroup(Alignment.LEADING)
-								.addComponent(lblSaves)
-								.addComponent(strSaveSpinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(dexSaveSpinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(conSaveSpinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(intlSaveSpinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(wisSaveSpinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(chaSaveSpinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+									.addGap(20)
+									.addComponent(btnRollStats)))
 							.addGap(74)
 							.addGroup(gl_mainPanel.createParallelGroup(Alignment.LEADING)
 								.addComponent(lblSkills)
@@ -518,22 +536,19 @@ public class GenGUI {
 										.addComponent(conMod)
 										.addComponent(lblCon))
 									.addGap(18)
-									.addGroup(gl_mainPanel.createParallelGroup(Alignment.LEADING)
-										.addGroup(gl_mainPanel.createSequentialGroup()
-											.addGroup(gl_mainPanel.createParallelGroup(Alignment.BASELINE)
-												.addComponent(intlSpinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-												.addComponent(lblInt))
-											.addGap(18)
-											.addGroup(gl_mainPanel.createParallelGroup(Alignment.BASELINE)
-												.addComponent(wisSpinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-												.addComponent(wisMod)
-												.addComponent(lblWis))
-											.addGap(18)
-											.addGroup(gl_mainPanel.createParallelGroup(Alignment.BASELINE)
-												.addComponent(chaSpinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-												.addComponent(chaMod)
-												.addComponent(lblCha)))
-										.addComponent(intlMod)))
+									.addGroup(gl_mainPanel.createParallelGroup(Alignment.BASELINE)
+										.addComponent(intlSpinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+										.addComponent(lblInt))
+									.addGap(18)
+									.addGroup(gl_mainPanel.createParallelGroup(Alignment.BASELINE)
+										.addComponent(wisSpinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+										.addComponent(wisMod)
+										.addComponent(lblWis))
+									.addGap(18)
+									.addGroup(gl_mainPanel.createParallelGroup(Alignment.BASELINE)
+										.addComponent(chaSpinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+										.addComponent(chaMod)
+										.addComponent(lblCha)))
 								.addGroup(gl_mainPanel.createSequentialGroup()
 									.addGap(18)
 									.addComponent(strSaveSpinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
@@ -542,7 +557,9 @@ public class GenGUI {
 									.addGap(18)
 									.addComponent(conSaveSpinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 									.addGap(18)
-									.addComponent(intlSaveSpinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+									.addGroup(gl_mainPanel.createParallelGroup(Alignment.BASELINE)
+										.addComponent(intlSaveSpinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+										.addComponent(intlMod))
 									.addGap(18)
 									.addComponent(wisSaveSpinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 									.addGap(18)
@@ -597,7 +614,8 @@ public class GenGUI {
 					.addGroup(gl_mainPanel.createParallelGroup(Alignment.BASELINE)
 						.addComponent(investigationText, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(lblInvestigation)
-						.addComponent(investigationProfCheckBox))
+						.addComponent(investigationProfCheckBox)
+						.addComponent(btnRollStats))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_mainPanel.createParallelGroup(Alignment.BASELINE)
 						.addComponent(medicineText, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
@@ -816,6 +834,8 @@ public class GenGUI {
 		
 		
 	}
+	
+	
 
 //	private void setupHeaderPanel() {
 //		headerPanel.setSize(FRAME_WIDTH, 120);
@@ -833,7 +853,7 @@ public class GenGUI {
 		
 		@Override 
 		public void mouseClicked(MouseEvent e) {
-			layerPane.moveToFront(genContainer);
+			
 		}
 		
 	}

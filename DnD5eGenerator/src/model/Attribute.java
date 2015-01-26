@@ -24,6 +24,10 @@ public class Attribute  {
 		
 	}
 	
+	public int getValue() {
+		return value;
+	}
+	
 	public String getName() {
 		return name;
 	}
